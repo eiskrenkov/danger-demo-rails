@@ -28,7 +28,7 @@ TODO_COMMENENT_REGEX = /(^|\s)(#{SUPPORTED_COMMENTS.join('|')})\sTODO:\s/
 end
 
 # 4. Annotate
-if git.modified_files.any? { |path| path.starts_with('db/migrate/') }
+if git.modified_files.any? { |path| path.start_with?('db/migrate/') }
   unless system('bundle exec annotate --frozen')
     failure('Annotations are out of date! Please, run `annotate` locally and push the changes')
   end
