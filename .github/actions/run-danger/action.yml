@@ -19,6 +19,7 @@ runs:
         bundler-cache: true
 
     - name: Run Danger
+      shell: bash
       run: |
         bundle exec danger \
         --dangerfile=${{ inputs.dangerfile-path }} \
