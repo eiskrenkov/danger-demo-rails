@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '3.3.1'
@@ -49,7 +51,7 @@ group :development, :test do
   gem 'debug', platforms: %i[ mri windows ]
 
   gem 'rspec-rails', '~> 6.1.0'
-  gem 'threat', path: '~/dev/threat'
+  gem 'threat', '1.1.0'
 end
 
 group :development do

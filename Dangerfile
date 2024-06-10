@@ -2,25 +2,20 @@
 
 danger.import_dangerfile(gem: 'threat')
 
-pr_title.run!
-
 on :local do
-  # rake 'db:create', 'db:migrate'
-
-  # rspec.run!
-  #
-
+  todo.run!
   rubocop.run!
 end
 
 on :github do
   workflow 'pr/lint' do
-    message "Message from github 'pr/lint' workflow"
+    pr_title.run!
+
+    todo.run!
+    rubocop.run!
   end
 
   workflow 'pr/ci' do
-    message "Message from github 'pr/ci' workflow"
-
     rake 'db:create', 'db:migrate'
 
     rspec.run!
