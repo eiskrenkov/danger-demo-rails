@@ -1,0 +1,29 @@
+name: Run Danger
+
+inputs:
+  ruby-version:
+    description: Ruby Version to run Danger with
+    default: 3.3.1
+  dangerfile-path:
+    description: Path to the Dangerfile to run
+    default: Dangerfile
+  workflow:
+    description: Danger workflow to run
+
+runs:
+  using: composite
+  steps:
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ inputs.ruby-version }}
+        bundler-cache: true
+
+    - name: Run Danger
+      shell: bash
+      run: |
+        bundle exec danger \
+        --dangerfile=${{ inputs.dangerfile-path }} \
+        --danger_id=${{ inputs.workflow || 'danger' }}
+      env:
+        DANGER_WORKFLOW: ${{ inputs.workflow }}
+        DANGER_GITHUB_API_TOKEN: ${{ github.token }}
